@@ -19,8 +19,8 @@ void countSort(std::string a[], int size, size_t k){
 
     for (int i = 0; i <257; i++){
         c[i] = 0;
-        //cout << c[i] << "\n";
     }
+
     for (int j = 0; j <size; j++){   
         c[k < a[j].size() ? (int)(unsigned char)a[j][k] + 1 : 0]++;
     }
@@ -38,7 +38,6 @@ void countSort(std::string a[], int size, size_t k){
         a[l] = b[l];
     }
 
-    // avold memory leak
     delete[] b;
     delete[] c;
 }
@@ -46,7 +45,7 @@ void countSort(std::string a[], int size, size_t k){
 
 void radixSort(std::string arr[], int r){
     size_t max = getMax(arr, r);
-    for (size_t digit = max; digit > 0; digit--){ // size_t is unsigned, so avoid using digit >= 0, which is always true
+    for (size_t digit = max; digit > 0; digit--){ 
         countSort(arr, r, digit - 1);
     }
 
