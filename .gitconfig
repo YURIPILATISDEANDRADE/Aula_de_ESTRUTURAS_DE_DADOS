@@ -1,0 +1,8 @@
+[gui]
+	recentrepo = Z:/TCC_PROJETO INTERDISCIPLINAR_EC2/EC2_PBL_GITHUB_MIRROR
+	recentrepo = Z:/TCC_PROJETO INTERDISCIPLINAR_EC2/eh
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
