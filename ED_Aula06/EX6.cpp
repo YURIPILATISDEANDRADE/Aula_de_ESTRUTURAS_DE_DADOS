@@ -1,7 +1,11 @@
 #include <iostream>
 #include <algorithm>
+#include <ctime>
+
 
 void insertionSort(int arranjo[], int tamanho) {
+    
+    
     for (int i = 1; i < tamanho; i++) {
         int chave = arranjo[i];
         int j = i - 1;
@@ -55,7 +59,8 @@ void quickSort(int arr[], int low, int high) {
 }
 
 int main() {
-    int arr[] = {1, 1, 1, 1, 1, 1, 2};
+    
+    int arr[] = {1, 9, 51, 1};
     int size = sizeof(arr) / sizeof(arr[0]);
 
     std::cout << "Arranjo original: ";
@@ -64,7 +69,7 @@ int main() {
     }
     std::cout << std::endl;
 
-    if (size < 10) {
+    if (size < 10) {        
         insertionSort(arr, size);
         std::cout << "Usando Insertion Sort" << std::endl;
     }
@@ -78,6 +83,7 @@ int main() {
         std::cout << arr[i] << " ";
     }
     std::cout << std::endl;
+    std::cout << "Tempo desenvolvido: " << float(std::clock()) / CLOCKS_PER_SEC << " s" ;
     
     return 0;
 }
