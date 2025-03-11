@@ -1,5 +1,7 @@
 #include <iostream>
 #include <algorithm>
+#include <ctime>
+
 
 int partition(int arr[], int low, int high) {
     int meio = (low + high) / 2;
@@ -31,18 +33,40 @@ int partition(int arr[], int low, int high) {
     return i + 1;
 }
 
-void quickSort(int arr[], int low, int high) {
-    if (low < high) {
-        int pi = partition(arr, low, high);
+int randompartition(int arr[], int low, int high) {
 
-        quickSort(arr, low, pi - 1);
-        quickSort(arr, pi + 1, high);
+    srand(time(NULL));
+    int random = low + rand() % (high - low);
+
+    std::swap(arr[random], arr[high]);
+ 
+    return partition(arr, low, high);
+}
+
+
+void quickSort(int arr[], int low, int high, bool type) {
+    if (low < high) {
+        
+        int pi = 0;
+
+        if (type == true)
+        {
+            pi = partition(arr, low, high);
+        }
+        else
+        {        
+            pi = randompartition(arr, low, high);
+        }
+
+        quickSort(arr, low, pi - 1, type);
+        quickSort(arr, pi + 1, high, type);
     }
 }
 
 int main() {
     int arr[] = {9, 12, 6, 0, 5, 3, 7, 13, 23, 1};
-    int size = sizeof(arr) / sizeof(arr[0]);
+    int size = sizeof(arr) / sizeof(arr[0]);    
+    bool type = true;
 
     std::cout << "Arranjo original: ";
     for (int i = 0; i < size; i++) {
@@ -50,13 +74,23 @@ int main() {
     }
     std::cout << std::endl;
 
-    quickSort(arr, 0, size - 1);
+    quickSort(arr, 0, size - 1, type);
+
+    if (type == true)
+    {
+        std::cout << "mediana de tres" << std::endl;
+    }
+    else
+    {
+        std::cout << "pivo aleatorio" << std::endl;
+    }
 
     std::cout << "Arranjo ordenado: ";
     for (int i = 0; i < size; i++) {
         std::cout << arr[i] << " ";
     }
     std::cout << std::endl;
+    std::cout << "Tempo desenvolvido: " << float(std::clock()) / CLOCKS_PER_SEC << " s" ;
     
 
     return 0;
